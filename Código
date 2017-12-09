@@ -1,0 +1,71 @@
+import time
+
+class Player:
+    vida = 40
+    ataque = 3
+    especial = 10
+
+class Inimigo:
+    vida = 40
+    ataque = 4
+
+inimigo1 = Inimigo()
+player = Player()
+
+turno = 1
+especial = 0
+round = 0
+
+while inimigo1.vida > 0 and player.vida > 0:
+    if turno == 1:
+
+        round += 1
+
+        print('Turno: ' + str(round))
+
+        if especial < 3:
+
+            print('Sua vida = ' + str(player.vida))
+
+            escolha_ataque = input('1-Ataque de Pedra')
+
+
+        if especial == 3:
+           print('Você Ganhou um novo Ataque!!!')
+           print('Sua vida = ' + str(player.vida))
+
+           escolha_ataque = input('1-Ataque de Pedra | 2- Ataque Relampago')
+
+        if escolha_ataque == '1':
+            inimigo1.vida = inimigo1.vida - player.ataque
+
+        if escolha_ataque == '2' and especial == 3:
+            inimigo1.vida = inimigo1.vida - player.especial
+            especial = 0
+
+        print('-----------------------')
+
+        turno = 0
+
+
+    if turno == 0:
+        round += 1
+        especial +=1
+
+    if inimigo1.vida > 0:
+        print('Turno: ' + str(round))
+        print('Vida do pc = ' + str(inimigo1.vida))
+        print('Pc Atacando.')
+
+        time.sleep(2)
+
+        player.vida = player.vida - inimigo1.ataque
+
+        print('-----------------------')
+        turno = 1
+
+if inimigo1.vida > 0 and player.vida <=0:
+    print('VOCÊ PERDEU!')
+
+if player.vida > 0  and inimigo1.vida <= 0:
+    print('VOCÊ GAAANHOOOUUU!!!!!')
